@@ -13,7 +13,7 @@ const App = () => {
 
   return (
     <>
-      <StatusBar barStyle="dark-content" backgroundColor="transparent" />
+      <StatusBar barStyle="dark-content" backgroundColor="#fff" />
       <NavigationContainer>
         <Navigator />
       </NavigationContainer>
