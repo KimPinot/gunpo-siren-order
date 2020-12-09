@@ -1,4 +1,5 @@
 import React, {useEffect} from 'react';
+import {NavigationContainer} from '@react-navigation/native';
 import {SafeAreaView, Text, StatusBar} from 'react-native';
 import SplashScreen from 'react-native-splash-screen';
 
@@ -12,9 +13,11 @@ const App = () => {
   return (
     <>
       <StatusBar barStyle="dark-content" backgroundColor="transparent" />
-      <SafeAreaView>
-        <Text>GunpoSirenOrder</Text>
-      </SafeAreaView>
+      <NavigationContainer>
+        <SafeAreaView>
+          <Text>GunpoSirenOrder</Text>
+        </SafeAreaView>
+      </NavigationContainer>
     </>
   );
 };
