@@ -1,12 +1,10 @@
 import React from 'react';
 import {SafeAreaView, View, Text, Image, Dimensions} from 'react-native';
-import {StackNavigationProp} from '@react-navigation/stack';
 
-interface HomeScreenProps {
-  navigation: StackNavigationProp<any>;
+interface CardScreenProps {
 }
 
-const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
+const CardScreen: React.FC<CardScreenProps> = () => {
   return (
     <SafeAreaView>
       <View
@@ -22,8 +20,7 @@ const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
             justifyContent: 'flex-start',
             width: Dimensions.get('window').width,
             padding: 15,
-          }}
-          onTouchEnd={() => navigation.push('card')}>
+          }}>
           <Image
             source={{
               uri:
@@ -38,31 +35,34 @@ const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
           <Text>2019-1234-5555</Text>
           <Text>100,000 원</Text>
         </View>
-
-        <View
-          style={{
-            padding: 15,
-          }}>
-          <Text>주문 스탬프</Text>
-          <Text>9 / 12 개 (75%)</Text>
-        </View>
-
-        <View
-          style={{
-            padding: 15,
-          }}>
-          <Text>주문하기</Text>
-        </View>
-
-        <View
-          style={{
-            padding: 15,
-          }}>
-          <Text>공지사항</Text>
+        
+        <View>
+          <Text>최근 이용 내역</Text>
+          <View>
+            <Text>10 / 25 : -1000 원</Text>
+          </View>
+          <View>
+            <Text>10 / 24 : -1000 원</Text>
+          </View>
+          <View>
+            <Text>10 / 23 : -1000 원</Text>
+          </View>
+          <View>
+            <Text>10 / 22 : -1000 원</Text>
+          </View>
+          <View>
+            <Text>10 / 21 : +10,000 원</Text>
+          </View>
+          <View>
+            <Text>10 / 20 : -1000 원</Text>
+          </View>
+          <View>
+            <Text>10 / 19 : -1000 원</Text>
+          </View>
         </View>
       </View>
     </SafeAreaView>
   );
 };
 
-export default HomeScreen;
+export default CardScreen;
