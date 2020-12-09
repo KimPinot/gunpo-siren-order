@@ -15,6 +15,20 @@ export const Navigator = () => {
         cardStyle: {
           backgroundColor: '#fff',
         },
+        cardStyleInterpolator: ({current, layouts}) => {
+          return {
+            cardStyle: {
+              transform: [
+                {
+                  translateX: current.progress.interpolate({
+                    inputRange: [0, 1],
+                    outputRange: [layouts.screen.width, 0],
+                  }),
+                },
+              ],
+            },
+          };
+        },
       }}>
       <Stack.Screen name="home" component={HomeScreen} />
     </Stack.Navigator>
