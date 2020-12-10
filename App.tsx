@@ -3,6 +3,8 @@ import {NavigationContainer} from '@react-navigation/native';
 import {StatusBar} from 'react-native';
 import SplashScreen from 'react-native-splash-screen';
 import {Navigator} from 'src/Navigator';
+import {ApplicationProvider} from '@ui-kitten/components';
+import * as eva from '@eva-design/eva';
 
 const App = () => {
   useEffect(() => {
@@ -15,7 +17,9 @@ const App = () => {
     <>
       <StatusBar barStyle="dark-content" backgroundColor="#fff" />
       <NavigationContainer>
-        <Navigator />
+        <ApplicationProvider {...eva} theme={eva.light}>
+          <Navigator />
+        </ApplicationProvider>
       </NavigationContainer>
     </>
   );
