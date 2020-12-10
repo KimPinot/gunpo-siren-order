@@ -4,6 +4,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 // Screen
 import HomeScreen from '@Screen/HomeScreen/HomeScreen';
 import CardScreen from '@Screen/CardScreen/CardScreen';
+import CouponScreen from '@Screen/CouponScreen/CouponScreen';
 
 export const Navigator = () => {
   const Stack = createStackNavigator();
@@ -33,6 +34,7 @@ export const Navigator = () => {
       }}>
       <Stack.Screen name="home" component={HomeScreen} />
       <Stack.Screen name="card" component={CardScreen} />
+      <Stack.Screen name="coupon" component={CouponScreen} />
     </Stack.Navigator>
   );
 };

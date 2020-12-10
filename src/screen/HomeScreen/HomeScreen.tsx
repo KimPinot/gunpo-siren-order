@@ -42,7 +42,8 @@ const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
         <View
           style={{
             padding: 15,
-          }}>
+          }}
+          onTouchEnd={() => navigation.push('coupon')}>
           <Text>주문 스탬프</Text>
           <Text>9 / 12 개 (75%)</Text>
         </View>
