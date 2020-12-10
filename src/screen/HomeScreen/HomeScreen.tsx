@@ -51,7 +51,8 @@ const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
         <View
           style={{
             padding: 15,
-          }}>
+          }}
+          onTouchEnd={() => navigation.push('order')}>
           <Text>주문하기</Text>
         </View>
       </View>
