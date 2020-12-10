@@ -25,14 +25,14 @@ const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
       <Layout style={styles.container}>
         <Layout
           style={styles.content}
-          onTouchEnd={() => navigation.push('card')}>
+          onTouchEnd={() => navigation.navigate('card')}>
           <UserCard />
         </Layout>
-        <Card style={styles.content} onPress={() => navigation.push('reward')}>
+        <Card style={styles.content} onPress={() => navigation.navigate('reward')}>
           <Text>주문 스탬프</Text>
           <Text>9 / 12 개 (75%)</Text>
         </Card>
-        <Card style={styles.content} onPress={() => navigation.push('order')}>
+        <Card style={styles.content} onPress={() => navigation.navigate('order')}>
           <Text>주문하기</Text>
         </Card>
       </Layout>
