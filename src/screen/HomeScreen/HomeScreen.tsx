@@ -1,6 +1,7 @@
 import React from 'react';
-import {SafeAreaView, View, Text, Image, Dimensions} from 'react-native';
+import {SafeAreaView, Image} from 'react-native';
 import {StackNavigationProp} from '@react-navigation/stack';
+import {Layout, Card, Text, TopNavigation} from '@ui-kitten/components';
 
 interface HomeScreenProps {
   navigation: StackNavigationProp<any>;
@@ -9,21 +10,15 @@ interface HomeScreenProps {
 const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
   return (
     <SafeAreaView>
-      <View
+      <TopNavigation
+        alignment="center"
+        title={(evaProps) => <Text {...evaProps}>BizCool Order</Text>}
+      />
+      <Layout
         style={{
           display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
         }}>
-        <View
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'flex-start',
-            width: Dimensions.get('window').width,
-            padding: 15,
-          }}
-          onTouchEnd={() => navigation.push('card')}>
+        <Card onPress={() => navigation.push('card')}>
           <Image
             source={{
               uri:
@@ -33,29 +28,18 @@ const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
               width: '100%',
               height: 100,
             }}
-            resizeMode={'stretch'}
           />
           <Text>2019-1234-5555</Text>
           <Text>100,000 원</Text>
-        </View>
-
-        <View
-          style={{
-            padding: 15,
-          }}
-          onTouchEnd={() => navigation.push('coupon')}>
+        </Card>
+        <Card onPress={() => navigation.push('coupon')}>
           <Text>주문 스탬프</Text>
           <Text>9 / 12 개 (75%)</Text>
-        </View>
-
-        <View
-          style={{
-            padding: 15,
-          }}
-          onTouchEnd={() => navigation.push('order')}>
+        </Card>
+        <Card onPress={() => navigation.push('order')}>
           <Text>주문하기</Text>
-        </View>
-      </View>
+        </Card>
+      </Layout>
     </SafeAreaView>
   );
 };

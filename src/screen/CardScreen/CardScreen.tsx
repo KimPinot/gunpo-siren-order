@@ -1,26 +1,45 @@
 import React from 'react';
-import {SafeAreaView, View, Text, Image, Dimensions} from 'react-native';
+import {SafeAreaView, View, Image} from 'react-native';
+import {
+  Layout,
+  Card,
+  Text,
+  List,
+  Divider,
+  ListItem,
+  TopNavigation,
+} from '@ui-kitten/components';
 
-interface CardScreenProps {
-}
+interface CardScreenProps {}
 
 const CardScreen: React.FC<CardScreenProps> = () => {
+  const data = new Array(8).fill({
+    title: 'Item',
+    description: 'Description for Item',
+  });
+  const moneyAccessory = () => (
+    <View>
+      <Text category="s2" status="primary">
+        1,000 원
+      </Text>
+      <Text category="c2">32,500 원</Text>
+    </View>
+  );
+  const listItem = () => (
+    <ListItem
+      title="아이스초코 외 1"
+      description="16:30 | 현금"
+      accessoryRight={moneyAccessory}
+    />
+  );
   return (
     <SafeAreaView>
-      <View
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}>
-        <View
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'flex-start',
-            width: Dimensions.get('window').width,
-            padding: 15,
-          }}>
+      <TopNavigation
+        alignment="center"
+        title={(evaProps) => <Text {...evaProps}>카드</Text>}
+      />
+      <Layout>
+        <Card>
           <Image
             source={{
               uri:
@@ -30,37 +49,16 @@ const CardScreen: React.FC<CardScreenProps> = () => {
               width: '100%',
               height: 100,
             }}
-            resizeMode={'stretch'}
           />
           <Text>2019-1234-5555</Text>
           <Text>100,000 원</Text>
-        </View>
-        
-        <View>
-          <Text>최근 이용 내역</Text>
-          <View>
-            <Text>10 / 25 : -1000 원</Text>
-          </View>
-          <View>
-            <Text>10 / 24 : -1000 원</Text>
-          </View>
-          <View>
-            <Text>10 / 23 : -1000 원</Text>
-          </View>
-          <View>
-            <Text>10 / 22 : -1000 원</Text>
-          </View>
-          <View>
-            <Text>10 / 21 : +10,000 원</Text>
-          </View>
-          <View>
-            <Text>10 / 20 : -1000 원</Text>
-          </View>
-          <View>
-            <Text>10 / 19 : -1000 원</Text>
-          </View>
-        </View>
-      </View>
+        </Card>
+        <List
+          data={data}
+          renderItem={listItem}
+          ItemSeparatorComponent={Divider}
+        />
+      </Layout>
     </SafeAreaView>
   );
 };

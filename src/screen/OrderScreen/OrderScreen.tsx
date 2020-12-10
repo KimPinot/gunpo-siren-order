@@ -1,29 +1,40 @@
 import React from 'react';
-import {SafeAreaView, View, Text, Button} from 'react-native';
+import {SafeAreaView, View} from 'react-native';
+import {List, Text, Divider} from '@ui-kitten/components';
+import {TopNavigation} from '@ui-kitten/components';
 
 interface OrderScreenProps {}
 
 const OrderScreen: React.FC<OrderScreenProps> = () => {
+  const data = [
+    {
+      name: '아이스 초코',
+      price: 1000,
+    },
+    {
+      name: '아이스 티',
+      price: 1000,
+    },
+  ];
+  const menus = ({item: {name, price}}) => (
+    <View>
+      <Text category="h5">{name}</Text>
+      <Text category="s2">{price} 원</Text>
+    </View>
+  );
   return (
     <SafeAreaView>
+      <TopNavigation
+        alignment="center"
+        title={(evaProps) => (
+          <Text {...evaProps}>
+            주문하기
+          </Text>
+        )}
+      />
       <View>
-        <Text>주문 가능한 메뉴</Text>
-
-        <View>
-          <Text>아이스 초코</Text>
-          <Text>1,000원</Text>
-          <Button title="추가하기">
-            <Text>추가하기</Text>
-          </Button>
-        </View>
-
-        <View>
-          <Text>아이스티</Text>
-          <Text>1,000원</Text>
-          <Button title="추가하기">
-            <Text>추가하기</Text>
-          </Button>
-        </View>
+        <Text category="h2">주문 가능한 메뉴</Text>
+        <List data={data} renderItem={menus} ItemSeparatorComponent={Divider} />
       </View>
     </SafeAreaView>
   );
