@@ -1,6 +1,14 @@
-import React from 'react';
-import {SafeAreaView, View, Text} from 'react-native';
-import {Divider, Icon, TopNavigation, TopNavigationAction} from '@ui-kitten/components';
+import React, {useState} from 'react';
+import {SafeAreaView, StyleSheet, Text} from 'react-native';
+import {
+  Divider,
+  Layout,
+  Icon,
+  TopNavigation,
+  TopNavigationAction,
+  TabView,
+  Tab,
+} from '@ui-kitten/components';
 import {StackNavigationProp} from '@react-navigation/stack';
 
 interface RewardScreenProps {
@@ -8,6 +16,7 @@ interface RewardScreenProps {
 }
 
 const RewardScreen: React.FC<RewardScreenProps> = ({navigation}) => {
+  const [selectedTab, setSelectedTab] = useState<number>(0);
   const BackAction = () => (
     <TopNavigationAction
       onPress={() => navigation.goBack()}
@@ -26,16 +35,28 @@ const RewardScreen: React.FC<RewardScreenProps> = ({navigation}) => {
         accessoryLeft={BackAction}
       />
       <Divider />
-      <View
-        style={{
-          padding: 15,
-        }}>
-        <Text>주문 스탬프</Text>
-        <Text>9 / 12 개 (75%)</Text>
-        <Text>앞으로 3개 남았습니다!</Text>
-      </View>
+      <TabView
+        selectedIndex={selectedTab}
+        onSelect={(index) => setSelectedTab(index)}>
+        <Tab title="마이 리워드">
+          <Layout style={styles.container}>
+            <Text>마이 리워드</Text>
+          </Layout>
+        </Tab>
+        <Tab title="히스토리">
+          <Layout style={styles.container}>
+            <Text>히스토리</Text>
+          </Layout>
+        </Tab>
+      </TabView>
     </SafeAreaView>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    padding: 15,
+  },
+});
 
 export default RewardScreen;
