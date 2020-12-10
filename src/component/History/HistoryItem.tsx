@@ -10,7 +10,7 @@ interface HistoryItemProps {
   item: HistoryType;
 }
 
-export const HistoryItem: React.FC<HistoryItemProps> = ({index, item}) => {
+const HistoryItem: React.FC<HistoryItemProps> = ({index, item}) => {
   const title =
     item.product.length >= 2
       ? `${item.product[0]} 외 ${item.product.length - 1}`
@@ -20,7 +20,6 @@ export const HistoryItem: React.FC<HistoryItemProps> = ({index, item}) => {
     item.paymentMethod === PaymentMethodType.inApp ? '현금' : '카드';
   return (
     <ListItem
-      key={index}
       title={title}
       description={`${paymentMethod} | ${item.timestamp}`}
       accessoryRight={() => (
@@ -40,3 +39,5 @@ const styles = StyleSheet.create({
     alignItems: 'flex-end',
   },
 });
+
+export default React.memo(HistoryItem);

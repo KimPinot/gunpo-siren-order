@@ -1,5 +1,5 @@
 import React from 'react';
-import {SafeAreaView} from 'react-native';
+import {SafeAreaView, StyleSheet, Dimensions} from 'react-native';
 import {
   Layout,
   Text,
@@ -27,16 +27,41 @@ const CardScreen: React.FC<CardScreenProps> = ({navigation}) => {
     <SafeAreaView>
       <TopNavigation
         alignment="center"
-        title={(evaProps) => <Text {...evaProps}>카드</Text>}
+        title={(evaProps) => <Text {...evaProps}>카드 관리</Text>}
         accessoryLeft={BackAction}
       />
       <Divider />
-      <Layout>
-        <UserCard />
-        <HistoryList />
+      <Layout style={styles.container}>
+        <HistoryList
+          headerComponent={
+            <>
+              <Layout style={styles.wrapper}>
+                <UserCard />
+              </Layout>
+
+              <Text style={styles.subTitle} category="s1">
+                사용 내역
+              </Text>
+              <Divider />
+            </>
+          }
+        />
       </Layout>
     </SafeAreaView>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    height: Dimensions.get('window').height - 86,
+    paddingHorizontal: 15,
+  },
+  wrapper: {
+    marginVertical: 15,
+  },
+  subTitle: {
+    marginBottom: 7.5,
+  },
+});
 
 export default CardScreen;
