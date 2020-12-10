@@ -1,14 +1,14 @@
 import React from 'react';
-import {SafeAreaView, View, Image} from 'react-native';
+import {SafeAreaView, View} from 'react-native';
 import {
   Layout,
-  Card,
   Text,
   List,
   Divider,
   ListItem,
   TopNavigation,
 } from '@ui-kitten/components';
+import {UserCard} from '@component/UserInfo/UserCard';
 
 interface CardScreenProps {}
 
@@ -39,20 +39,9 @@ const CardScreen: React.FC<CardScreenProps> = () => {
         title={(evaProps) => <Text {...evaProps}>카드</Text>}
       />
       <Layout>
-        <Card>
-          <Image
-            source={{
-              uri:
-                'https://bwipjs-api.metafloor.com/?bcid=code128&text=AB1234567890&scale=3',
-            }}
-            style={{
-              width: '100%',
-              height: 100,
-            }}
-          />
-          <Text>2019-1234-5555</Text>
-          <Text>100,000 원</Text>
-        </Card>
+        <Layout>
+          <UserCard />
+        </Layout>
         <List
           data={data}
           renderItem={listItem}
