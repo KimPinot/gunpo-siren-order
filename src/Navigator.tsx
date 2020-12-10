@@ -2,10 +2,10 @@ import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 
 // Screen
-import HomeScreen from '@Screen/HomeScreen/HomeScreen';
-import CardScreen from '@Screen/CardScreen/CardScreen';
-import CouponScreen from '@Screen/CouponScreen/CouponScreen';
-import OrderScreen from '@Screen/OrderScreen/OrderScreen';
+import HomeScreen from '@screen/HomeScreen/HomeScreen';
+import CardScreen from '@screen/CardScreen/CardScreen';
+import CouponScreen from '@screen/CouponScreen/CouponScreen';
+import OrderScreen from '@screen/OrderScreen/OrderScreen';
 
 export const Navigator = () => {
   const Stack = createStackNavigator();

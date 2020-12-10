@@ -18,7 +18,10 @@ module.exports = {
           '.json',
         ],
         alias: {
-          '@Screen': ['./src/screen'],
+          '@screen': ['./src/screen'],
+          '@interface': ['./src/interface'],
+          '@lib': ['./src/lib'],
+          '@component': ['./src/component'],
         },
       },
     ],
