@@ -1,7 +1,13 @@
 import React from 'react';
-import {SafeAreaView} from 'react-native';
+import {StyleSheet} from 'react-native';
 import {StackNavigationProp} from '@react-navigation/stack';
-import {Layout, Card, Text, TopNavigation} from '@ui-kitten/components';
+import {
+  Layout,
+  Card,
+  Divider,
+  Text,
+  TopNavigation,
+} from '@ui-kitten/components';
 import {UserCard} from '@component/UserInfo/UserCard';
 
 interface HomeScreenProps {
@@ -10,28 +16,40 @@ interface HomeScreenProps {
 
 const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
   return (
-    <SafeAreaView>
+    <>
       <TopNavigation
         alignment="center"
         title={(evaProps) => <Text {...evaProps}>BizCool Order</Text>}
       />
-      <Layout
-        style={{
-          display: 'flex',
-        }}>
-        <Layout onTouchEnd={() => navigation.push('card')}>
+      <Divider />
+      <Layout style={styles.container}>
+        <Layout
+          style={styles.content}
+          onTouchEnd={() => navigation.push('card')}>
           <UserCard />
         </Layout>
-        <Card onPress={() => navigation.push('coupon')}>
+        <Card style={styles.content} onPress={() => navigation.push('coupon')}>
           <Text>주문 스탬프</Text>
           <Text>9 / 12 개 (75%)</Text>
         </Card>
-        <Card onPress={() => navigation.push('order')}>
+        <Card style={styles.content} onPress={() => navigation.push('order')}>
           <Text>주문하기</Text>
         </Card>
       </Layout>
-    </SafeAreaView>
+    </>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    flexDirection: 'column',
+    height: '100%',
+    paddingHorizontal: 15,
+  },
+  content: {
+    marginTop: 15,
+  },
+});
 
 export default HomeScreen;
