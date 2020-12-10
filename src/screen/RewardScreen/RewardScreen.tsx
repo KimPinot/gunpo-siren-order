@@ -2,9 +2,9 @@ import React from 'react';
 import {SafeAreaView, View, Text} from 'react-native';
 import {TopNavigation} from '@ui-kitten/components';
 
-interface CouponScreenProps {}
+interface RewardScreenProps {}
 
-const CouponScreen: React.FC<CouponScreenProps> = () => {
+const RewardScreen: React.FC<RewardScreenProps> = () => {
   return (
     <SafeAreaView>
       <TopNavigation
@@ -27,4 +27,4 @@ const CouponScreen: React.FC<CouponScreenProps> = () => {
   );
 };
 
-export default CouponScreen;
+export default RewardScreen;

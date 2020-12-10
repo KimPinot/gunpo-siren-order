@@ -28,7 +28,7 @@ const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
           onTouchEnd={() => navigation.push('card')}>
           <UserCard />
         </Layout>
-        <Card style={styles.content} onPress={() => navigation.push('coupon')}>
+        <Card style={styles.content} onPress={() => navigation.push('reward')}>
           <Text>주문 스탬프</Text>
           <Text>9 / 12 개 (75%)</Text>
         </Card>
