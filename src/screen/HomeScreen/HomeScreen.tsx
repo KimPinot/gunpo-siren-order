@@ -53,13 +53,6 @@ const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
           }}>
           <Text>주문하기</Text>
         </View>
-
-        <View
-          style={{
-            padding: 15,
-          }}>
-          <Text>공지사항</Text>
-        </View>
       </View>
     </SafeAreaView>
   );
