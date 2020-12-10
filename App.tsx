@@ -15,7 +15,7 @@ const App = () => {
 
   return (
     <>
-      <StatusBar barStyle="dark-content" backgroundColor="#fff" />
+      <StatusBar barStyle="dark-content" backgroundColor="transparent" />
       <NavigationContainer>
         <ApplicationProvider {...eva} theme={eva.light}>
           <Navigator />
