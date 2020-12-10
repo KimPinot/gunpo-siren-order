@@ -1,12 +1,21 @@
 import React from 'react';
 import {SafeAreaView, View} from 'react-native';
-import {List, Text, Divider} from '@ui-kitten/components';
-import {TopNavigation} from '@ui-kitten/components';
+import {
+  List,
+  Text,
+  Divider,
+  TopNavigation,
+  TopNavigationAction,
+  Icon,
+} from '@ui-kitten/components';
 import {ProductInfoType} from '@interface/types';
+import {StackNavigationProp} from '@react-navigation/stack';
 
-interface OrderScreenProps {}
+interface OrderScreenProps {
+  navigation: StackNavigationProp<any>;
+}
 
-const OrderScreen: React.FC<OrderScreenProps> = () => {
+const OrderScreen: React.FC<OrderScreenProps> = ({navigation}) => {
   const data: ProductInfoType[] = [
     {
       name: '아이스 초코',
@@ -17,6 +26,12 @@ const OrderScreen: React.FC<OrderScreenProps> = () => {
       price: 1000,
     },
   ];
+  const BackAction = () => (
+    <TopNavigationAction
+      onPress={() => navigation.goBack()}
+      icon={(props) => <Icon {...props} name="arrow-back" />}
+    />
+  );
   const menus = ({item: {name, price}}: {item: ProductInfoType}) => (
     <View>
       <Text category="h5">{name}</Text>
@@ -32,6 +47,7 @@ const OrderScreen: React.FC<OrderScreenProps> = () => {
             주문하기
           </Text>
         )}
+        accessoryLeft={BackAction}
       />
       <View>
         <Text category="h2">주문 가능한 메뉴</Text>

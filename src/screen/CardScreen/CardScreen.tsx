@@ -7,12 +7,23 @@ import {
   Divider,
   ListItem,
   TopNavigation,
+  TopNavigationAction,
+  Icon,
 } from '@ui-kitten/components';
 import {UserCard} from '@component/UserInfo/UserCard';
+import {StackNavigationProp} from '@react-navigation/stack';
 
-interface CardScreenProps {}
+interface CardScreenProps {
+  navigation: StackNavigationProp<any>;
+}
 
-const CardScreen: React.FC<CardScreenProps> = () => {
+const CardScreen: React.FC<CardScreenProps> = ({navigation}) => {
+  const BackAction = () => (
+    <TopNavigationAction
+      onPress={() => navigation.goBack()}
+      icon={(props) => <Icon {...props} name="arrow-back" />}
+    />
+  );
   const data = new Array(8).fill({
     title: 'Item',
     description: 'Description for Item',
@@ -37,6 +48,7 @@ const CardScreen: React.FC<CardScreenProps> = () => {
       <TopNavigation
         alignment="center"
         title={(evaProps) => <Text {...evaProps}>카드</Text>}
+        accessoryLeft={BackAction}
       />
       <Layout>
         <Layout>

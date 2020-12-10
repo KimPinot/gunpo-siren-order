@@ -1,10 +1,19 @@
 import React from 'react';
 import {SafeAreaView, View, Text} from 'react-native';
-import {TopNavigation} from '@ui-kitten/components';
+import {Icon, TopNavigation, TopNavigationAction} from '@ui-kitten/components';
+import {StackNavigationProp} from '@react-navigation/stack';
 
-interface RewardScreenProps {}
+interface RewardScreenProps {
+  navigation: StackNavigationProp<any>;
+}
 
-const RewardScreen: React.FC<RewardScreenProps> = () => {
+const RewardScreen: React.FC<RewardScreenProps> = ({navigation}) => {
+  const BackAction = () => (
+    <TopNavigationAction
+      onPress={() => navigation.goBack()}
+      icon={(props) => <Icon {...props} name="arrow-back" />}
+    />
+  );
   return (
     <SafeAreaView>
       <TopNavigation
@@ -14,6 +23,7 @@ const RewardScreen: React.FC<RewardScreenProps> = () => {
             리워드
           </Text>
         )}
+        accessoryLeft={BackAction}
       />
       <View
         style={{
