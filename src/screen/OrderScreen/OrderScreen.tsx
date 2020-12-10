@@ -49,6 +49,7 @@ const OrderScreen: React.FC<OrderScreenProps> = ({navigation}) => {
         )}
         accessoryLeft={BackAction}
       />
+      <Divider />
       <View>
         <Text category="h2">주문 가능한 메뉴</Text>
         <List data={data} renderItem={menus} ItemSeparatorComponent={Divider} />

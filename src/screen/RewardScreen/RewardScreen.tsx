@@ -1,6 +1,6 @@
 import React from 'react';
 import {SafeAreaView, View, Text} from 'react-native';
-import {Icon, TopNavigation, TopNavigationAction} from '@ui-kitten/components';
+import {Divider, Icon, TopNavigation, TopNavigationAction} from '@ui-kitten/components';
 import {StackNavigationProp} from '@react-navigation/stack';
 
 interface RewardScreenProps {
@@ -25,6 +25,7 @@ const RewardScreen: React.FC<RewardScreenProps> = ({navigation}) => {
         )}
         accessoryLeft={BackAction}
       />
+      <Divider />
       <View
         style={{
           padding: 15,

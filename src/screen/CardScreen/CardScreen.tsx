@@ -50,6 +50,7 @@ const CardScreen: React.FC<CardScreenProps> = ({navigation}) => {
         title={(evaProps) => <Text {...evaProps}>카드</Text>}
         accessoryLeft={BackAction}
       />
+      <Divider />
       <Layout>
         <Layout>
           <UserCard />
