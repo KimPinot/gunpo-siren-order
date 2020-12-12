@@ -1,5 +1,5 @@
 import React from 'react';
-import {Divider, Layout, List, Text} from '@ui-kitten/components';
+import {Divider, List} from '@ui-kitten/components';
 import HistoryItem from '@component/History/HistoryItem';
 import {
   HistoryType,
