@@ -9,11 +9,13 @@ import {
   TopNavigation,
 } from '@ui-kitten/components';
 import {UserCard} from '@component/UserInfo/UserCard';
+import {Progress} from '@component/Progress';
 
 interface HomeScreenProps {
   navigation: StackNavigationProp<any>;
 }
 
+const stamp = 6;
 const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
   return (
     <>
@@ -32,8 +34,20 @@ const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
           <Card
             style={styles.contentColumn}
             onPress={() => navigation.navigate('reward')}>
-            <Text>주문 스탬프</Text>
-            <Text>9 / 12 개 (75%)</Text>
+            <Progress
+              {...{
+                current: stamp,
+                max: 12,
+                color: {
+                  tint: '#FFC7A9',
+                  secondary: '#FF4128',
+                  background: '#FFE6D3',
+                },
+              }}
+            />
+            <Text category="s1" style={styles.label}>
+              리워드
+            </Text>
           </Card>
           <Card style={styles.contentColumnLast}>
             <Text>쿠폰</Text>
@@ -59,13 +73,22 @@ const styles = StyleSheet.create({
   content: {
     marginTop: 15,
   },
+  label: {
+    position: 'absolute',
+    width: '100%',
+    left: 29,
+    bottom: 20,
+    textAlign: 'center',
+  },
   contentRow: {
     marginTop: 15,
     flexDirection: 'row',
   },
   contentColumn: {
+    position: 'relative',
     flex: 1,
     marginRight: 5,
+    alignItems: 'center',
   },
   contentColumnLast: {
     marginLeft: 5,
