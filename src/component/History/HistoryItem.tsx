@@ -20,6 +20,7 @@ const HistoryItem: React.FC<HistoryItemProps> = ({index, item}) => {
     item.paymentMethod === PaymentMethodType.inApp ? '현금' : '카드';
   return (
     <ListItem
+      disabled={true}
       title={title}
       description={`${paymentMethod} | ${item.timestamp}`}
       accessoryRight={() => (

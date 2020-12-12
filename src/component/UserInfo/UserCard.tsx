@@ -9,7 +9,7 @@ export const UserCard: React.FC<UserCardProps> = () => {
   const cardNumber = 202012345678;
   const credit = 5000;
   return (
-    <Card style={styles.container}>
+    <Card disabled={true} style={styles.container}>
       <Image
         source={{
           uri: `https://bwipjs-api.metafloor.com/?bcid=code128&text=${splitCardNum(
