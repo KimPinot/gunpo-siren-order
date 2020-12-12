@@ -9,6 +9,8 @@ import {
   TabView,
   Tab,
   Text,
+  List,
+  ListItem,
 } from '@ui-kitten/components';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {Progress} from '@component/Progress';
@@ -64,7 +66,34 @@ const RewardScreen: React.FC<RewardScreenProps> = ({navigation}) => {
         </Tab>
         <Tab title="히스토리">
           <Layout style={styles.container}>
-            <Text>히스토리</Text>
+            <List
+              data={Array(10).fill('테스트')}
+              style={styles.list}
+              renderItem={({item}) => (
+                <ListItem
+                  title={item}
+                  disabled={true}
+                  description={() => (
+                    <Layout style={styles.listDisc}>
+                      <Text style={styles.date}>일자 : 2020.10.05 12:30</Text>
+                      <Text style={styles.desc}>일반 적립</Text>
+                    </Layout>
+                  )}
+                  accessoryLeft={() => (
+                    <Layout>
+                      <Icon
+                        style={styles.icon}
+                        fill="#000"
+                        name="heart-outline"
+                      />
+                      <Text style={styles.label}>+12</Text>
+                    </Layout>
+                  )}
+                />
+              )}
+              keyExtractor={(_, index) => index.toString()}
+              ItemSeparatorComponent={Divider}
+            />
           </Layout>
         </Tab>
       </TabView>
@@ -89,6 +118,32 @@ const styles = StyleSheet.create({
   },
   indicator: {
     marginBottom: 15,
+  },
+  list: {
+    backgroundColor: 'transparent',
+  },
+  listDisc: {
+    paddingTop: 5,
+    paddingLeft: 7.5,
+  },
+  date: {
+    fontSize: 10,
+  },
+  desc: {
+    fontSize: 12,
+    fontWeight: 'bold',
+  },
+  icon: {
+    width: 47.5,
+    height: 47.5,
+  },
+  label: {
+    position: 'absolute',
+    top: 17,
+    left: 8,
+    width: 30,
+    fontSize: 9,
+    textAlign: 'center',
   },
 });
 
