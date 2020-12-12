@@ -84,7 +84,7 @@ const RewardScreen: React.FC<RewardScreenProps> = ({navigation}) => {
                       <Icon
                         style={styles.icon}
                         fill="#000"
-                        name="heart-outline"
+                        name="heart"
                       />
                       <Text style={styles.label}>+12</Text>
                     </Layout>
@@ -139,11 +139,12 @@ const styles = StyleSheet.create({
   },
   label: {
     position: 'absolute',
-    top: 17,
+    top: 15,
     left: 8,
     width: 30,
-    fontSize: 9,
+    fontSize: 12,
     textAlign: 'center',
+    color: '#fff',
   },
 });
 
