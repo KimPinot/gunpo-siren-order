@@ -7,6 +7,7 @@ import {
   Divider,
   Text,
   TopNavigation,
+  Icon,
 } from '@ui-kitten/components';
 import {UserCard} from '@component/UserInfo/UserCard';
 import {Progress} from '@component/Progress';
@@ -50,7 +51,10 @@ const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
             </Text>
           </Card>
           <Card style={styles.contentColumnLast}>
-            <Text>쿠폰</Text>
+            <Layout>
+              <Icon style={styles.icon} fill="#000" name="file-text-outline" />
+              <Text category="s1" style={styles.text}>쿠폰</Text>
+            </Layout>
           </Card>
         </Layout>
         <Card
@@ -80,6 +84,14 @@ const styles = StyleSheet.create({
     bottom: 20,
     textAlign: 'center',
   },
+  icon: {
+    height: 50,
+    width: 50,
+  },
+  text: {
+    textAlign: 'center',
+    marginTop: 10,
+  },
   contentRow: {
     marginTop: 15,
     flexDirection: 'row',
@@ -93,6 +105,8 @@ const styles = StyleSheet.create({
   contentColumnLast: {
     marginLeft: 5,
     flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
 
