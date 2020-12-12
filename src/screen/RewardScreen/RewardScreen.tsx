@@ -80,15 +80,13 @@ const RewardScreen: React.FC<RewardScreenProps> = ({navigation}) => {
                     </Layout>
                   )}
                   accessoryLeft={() => (
-                    <Layout>
-                      <Icon
-                        style={styles.icon}
-                        fill="#000"
-                        name="heart"
-                      />
-                      <Text style={styles.label}>+12</Text>
-                    </Layout>
+                    <Icon
+                      style={styles.icon}
+                      fill="#000"
+                      name="heart-outline"
+                    />
                   )}
+                  accessoryRight={() => <Text status={12 > 0 ? 'primary' : ''} category="h6">+12</Text>}
                 />
               )}
               keyExtractor={(_, index) => index.toString()}

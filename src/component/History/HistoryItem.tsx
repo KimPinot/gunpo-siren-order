@@ -25,7 +25,7 @@ const HistoryItem: React.FC<HistoryItemProps> = ({index, item}) => {
       description={`${paymentMethod} | ${item.timestamp}`}
       accessoryRight={() => (
         <Layout style={styles.priceContainer}>
-          <Text category="s2" status={isAddHistory ? 'primary' : ''}>
+          <Text category="s2" style={styles.price} status={isAddHistory ? 'primary' : ''}>
             {localizeCredit(item.price)}
           </Text>
         </Layout>
@@ -38,6 +38,10 @@ const styles = StyleSheet.create({
   priceContainer: {
     flexDirection: 'column',
     alignItems: 'flex-end',
+  },
+  price: {
+    fontSize: 15,
+    fontWeight: 'bold',
   },
 });
 
