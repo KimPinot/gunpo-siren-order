@@ -28,12 +28,17 @@ const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
           onTouchEnd={() => navigation.navigate('card')}>
           <UserCard />
         </Layout>
-        <Card
-          style={styles.content}
-          onPress={() => navigation.navigate('reward')}>
-          <Text>주문 스탬프</Text>
-          <Text>9 / 12 개 (75%)</Text>
-        </Card>
+        <Layout style={styles.contentRow}>
+          <Card
+            style={styles.contentColumn}
+            onPress={() => navigation.navigate('reward')}>
+            <Text>주문 스탬프</Text>
+            <Text>9 / 12 개 (75%)</Text>
+          </Card>
+          <Card style={styles.contentColumnLast}>
+            <Text>쿠폰</Text>
+          </Card>
+        </Layout>
         <Card
           style={styles.content}
           onPress={() => navigation.navigate('order')}>
@@ -53,6 +58,18 @@ const styles = StyleSheet.create({
   },
   content: {
     marginTop: 15,
+  },
+  contentRow: {
+    marginTop: 15,
+    flexDirection: 'row',
+  },
+  contentColumn: {
+    flex: 1,
+    marginRight: 5,
+  },
+  contentColumnLast: {
+    marginLeft: 5,
+    flex: 1,
   },
 });
 
