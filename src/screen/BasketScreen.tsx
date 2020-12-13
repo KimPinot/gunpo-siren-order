@@ -48,9 +48,7 @@ const BasketScreen: React.FC<BasketScreenProps> = ({
             height: Dimensions.get('screen').width - 30,
             borderRadius: 10,
           }}
-          source={{
-            uri: 'http://placehold.it/500x500',
-          }}
+          source={item.uri}
         />
         <Text style={styles.name}>{item.name}</Text>
         <Text style={styles.price}>{localizeCredit(item.price)}</Text>
@@ -99,9 +97,6 @@ const styles = StyleSheet.create({
   button: {
     flex: 1,
     marginRight: 7.5,
-    backgroundColor: '#FFC7A9',
-    borderColor: '#FFC7A9',
-    color: '#000',
   },
   buttonLast: {
     flex: 1,

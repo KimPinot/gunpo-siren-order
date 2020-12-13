@@ -23,14 +23,17 @@ const OrderScreen: React.FC<OrderScreenProps> = ({navigation}) => {
     {
       name: '아이스 초코',
       price: 1000,
+      uri: require('../../../asset/product/1i.jpg'),
     },
     {
       name: '아이스 티',
       price: 1000,
+      uri: require('../../../asset/product/0.jpg'),
     },
     {
       name: '핫초코',
       price: 1000,
+      uri: require('../../../asset/product/1h.jpg'),
     },
   ];
   const BackAction = () => (
@@ -51,11 +54,9 @@ const OrderScreen: React.FC<OrderScreenProps> = ({navigation}) => {
         <List
           data={data}
           style={styles.list}
-          renderItem={({item: {name, price}}: {item: ProductInfoType}) => (
+          renderItem={({item}: {item: ProductInfoType}) => (
             <ListItem
-              onPress={() =>
-                navigation.navigate('basket', {item: {name, price}})
-              }
+              onPress={() => navigation.navigate('basket', {item})}
               accessoryLeft={() => (
                 <Image
                   style={{
@@ -63,14 +64,12 @@ const OrderScreen: React.FC<OrderScreenProps> = ({navigation}) => {
                     height: 60,
                     borderRadius: 500,
                   }}
-                  source={{
-                    uri: 'http://placehold.it/500x500',
-                  }}
+                  source={item.uri}
                 />
               )}
-              title={() => <Text style={styles.name}>{name}</Text>}
+              title={() => <Text style={styles.name}>{item.name}</Text>}
               description={() => (
-                <Text style={styles.price}>{localizeCredit(price)}</Text>
+                <Text style={styles.price}>{localizeCredit(item.price)}</Text>
               )}
             />
           )}
