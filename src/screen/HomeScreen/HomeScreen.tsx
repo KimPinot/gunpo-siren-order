@@ -46,9 +46,21 @@ const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
                 },
               }}
             />
-            <Text category="s1" style={styles.label}>
-              리워드
-            </Text>
+            <Layout
+              style={{
+                position: 'absolute',
+                bottom: 20,
+                left: '50%',
+                transform: [
+                  {
+                    translateX: 15,
+                  },
+                ],
+              }}>
+              <Text category="s1" style={styles.label}>
+                리워드
+              </Text>
+            </Layout>
           </Card>
           <Card style={styles.contentColumnLast}>
             <Layout>
@@ -78,11 +90,8 @@ const styles = StyleSheet.create({
     marginTop: 15,
   },
   label: {
-    position: 'absolute',
-    width: '100%',
-    left: 29,
-    bottom: 20,
     textAlign: 'center',
+    left: '-50%',
   },
   icon: {
     height: 50,
