@@ -53,6 +53,9 @@ const OrderScreen: React.FC<OrderScreenProps> = ({navigation}) => {
           style={styles.list}
           renderItem={({item: {name, price}}: {item: ProductInfoType}) => (
             <ListItem
+              onPress={() =>
+                navigation.navigate('basket', {item: {name, price}})
+              }
               accessoryLeft={() => (
                 <Image
                   style={{
