@@ -7,6 +7,7 @@ import CardScreen from '@screen/CardScreen/CardScreen';
 import RewardScreen from '@screen/RewardScreen/RewardScreen';
 import OrderScreen from '@screen/OrderScreen/OrderScreen';
 import BasketScreen from '@screen/BasketScreen';
+import PaymentScreen from '@screen/PaymentScreen';
 
 export const Navigator = () => {
   const Stack = createStackNavigator();
@@ -39,6 +40,7 @@ export const Navigator = () => {
       <Stack.Screen name="reward" component={RewardScreen} />
       <Stack.Screen name="order" component={OrderScreen} />
       <Stack.Screen name="basket" component={BasketScreen} />
+      <Stack.Screen name="payment" component={PaymentScreen} />
     </Stack.Navigator>
   );
 };

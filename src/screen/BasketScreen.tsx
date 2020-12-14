@@ -69,7 +69,12 @@ const BasketScreen: React.FC<BasketScreenProps> = ({
         </Layout>
         <Layout style={styles.ButtonContainer}>
           <Button style={styles.button} status="basic">장바구니에 추가</Button>
-          <Button style={styles.button} status="basic">주문하기</Button>
+          <Button
+            style={styles.button}
+            status="basic"
+            onPress={() => navigation.navigate('payment')}>
+            주문하기
+          </Button>
         </Layout>
       </ScrollView>
     </Layout>
