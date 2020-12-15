@@ -12,6 +12,8 @@ import {StackNavigationProp} from '@react-navigation/stack';
 import {ProductInfoType} from '@interface/types';
 import {StyleSheet, ScrollView, Dimensions, Image} from 'react-native';
 import {localizeCredit} from '@lib/utils';
+import {useDispatch} from 'react-redux';
+import {setBasket} from '@store/slices/appSlice';
 
 interface BasketScreenProps {
   navigation: StackNavigationProp<any>;
@@ -29,6 +31,7 @@ const BasketScreen: React.FC<BasketScreenProps> = ({
   },
 }) => {
   const [current, setCurrent] = useState<number>(1);
+  const dispatch = useDispatch();
   const BackAction = () => (
     <TopNavigationAction
       onPress={() => navigation.goBack()}
@@ -74,7 +77,10 @@ const BasketScreen: React.FC<BasketScreenProps> = ({
           <Button
             style={styles.button}
             status="basic"
-            onPress={() => navigation.navigate('payment')}>
+            onPress={() => {
+              dispatch(setBasket(Array(current).fill(item)));
+              navigation.navigate('payment');
+            }}>
             주문하기
           </Button>
         </Layout>

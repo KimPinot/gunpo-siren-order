@@ -2,24 +2,34 @@ import React from 'react';
 import {Image, StyleSheet} from 'react-native';
 import {Card, Text} from '@ui-kitten/components';
 import {splitCardNum, localizeCredit} from '@lib/utils';
+import {useUserState} from '@store/index';
 
 interface UserCardProps {}
 
 export const UserCard: React.FC<UserCardProps> = () => {
-  const cardNumber = 202012345678;
-  const credit = 5000;
+  const {
+    isLoggedIn,
+    userInfo: {userId, credit},
+  } = useUserState();
+  if (!isLoggedIn) {
+    return (
+      <Card disabled={true} style={styles.container}>
+        <Text>로그인하세요.</Text>
+      </Card>
+    );
+  }
   return (
     <Card disabled={true} style={styles.container}>
       <Image
         source={{
           uri: `https://bwipjs-api.metafloor.com/?bcid=code128&text=${splitCardNum(
-            cardNumber,
+            userId,
           )}&scale=3`,
         }}
         style={styles.barcode}
       />
       <Text category="s1" style={styles.cardNumber}>
-        {splitCardNum(cardNumber)}
+        {splitCardNum(userId)}
       </Text>
       <Text category="h5" style={styles.credit}>
         {localizeCredit(credit)}

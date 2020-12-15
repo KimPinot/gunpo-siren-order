@@ -14,13 +14,16 @@ import {
 } from '@ui-kitten/components';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {Progress} from '@component/Progress';
+import {useUserState} from '@store/index';
 
 interface RewardScreenProps {
   navigation: StackNavigationProp<any>;
 }
 
-const stamp = 6;
 const RewardScreen: React.FC<RewardScreenProps> = ({navigation}) => {
+  const {
+    userInfo: {rewards, rewardHistory},
+  } = useUserState();
   const [selectedTab, setSelectedTab] = useState<number>(0);
   const BackAction = () => (
     <TopNavigationAction
@@ -45,7 +48,7 @@ const RewardScreen: React.FC<RewardScreenProps> = ({navigation}) => {
               <Layout style={styles.progressWrapper}>
                 <Progress
                   {...{
-                    current: stamp,
+                    current: rewards,
                     max: 12,
                     color: {
                       tint: '#FFC7A9',
@@ -56,7 +59,7 @@ const RewardScreen: React.FC<RewardScreenProps> = ({navigation}) => {
                 />
               </Layout>
               <Text style={styles.indicator}>
-                무료 음료 쿠폰 발행까지 {12 - stamp}개의 하트가 남았습니다.
+                무료 음료 쿠폰 발행까지 {12 - rewards}개의 하트가 남았습니다.
               </Text>
               <Text category="label">
                 쿠폰 발행은 최대 24시간까지 소요될 수 있습니다.
@@ -67,16 +70,16 @@ const RewardScreen: React.FC<RewardScreenProps> = ({navigation}) => {
         <Tab title="히스토리">
           <Layout style={styles.container}>
             <List
-              data={Array(10).fill('테스트')}
+              data={rewardHistory}
               style={styles.list}
               renderItem={({item}) => (
                 <ListItem
-                  title={item}
+                  title={item.title}
                   disabled={true}
                   description={() => (
                     <Layout style={styles.listDisc}>
-                      <Text style={styles.date}>일자 : 2020.10.05 12:30</Text>
-                      <Text style={styles.desc}>일반 적립</Text>
+                      <Text style={styles.date}>일자 : {item.timestamp}</Text>
+                      <Text style={styles.desc}>{item.description}</Text>
                     </Layout>
                   )}
                   accessoryLeft={() => (
@@ -86,7 +89,14 @@ const RewardScreen: React.FC<RewardScreenProps> = ({navigation}) => {
                       name="heart-outline"
                     />
                   )}
-                  accessoryRight={() => <Text status={12 > 0 ? 'primary' : ''} category="h6">+12</Text>}
+                  accessoryRight={() => (
+                    <Text
+                      status={item.count > 0 ? 'primary' : ''}
+                      category="h6">
+                      {item.count > 0 ? '+' : ''}
+                      {item.count}
+                    </Text>
+                  )}
                 />
               )}
               keyExtractor={(_, index) => index.toString()}

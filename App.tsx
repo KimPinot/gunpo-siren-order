@@ -6,6 +6,8 @@ import {Navigator} from 'src/Navigator';
 import {ApplicationProvider, IconRegistry} from '@ui-kitten/components';
 import * as eva from '@eva-design/eva';
 import {EvaIconsPack} from '@ui-kitten/eva-icons';
+import store from '@store/index';
+import {Provider} from 'react-redux';
 
 const App = () => {
   useEffect(() => {
@@ -20,7 +22,9 @@ const App = () => {
       <NavigationContainer>
         <IconRegistry icons={EvaIconsPack} />
         <ApplicationProvider {...eva} theme={eva.light}>
-          <Navigator />
+          <Provider store={store}>
+            <Navigator />
+          </Provider>
         </ApplicationProvider>
       </NavigationContainer>
     </>

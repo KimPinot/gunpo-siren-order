@@ -11,13 +11,16 @@ import {
 } from '@ui-kitten/components';
 import {UserCard} from '@component/UserInfo/UserCard';
 import {Progress} from '@component/Progress';
+import {useUserState} from '@store/index';
 
 interface HomeScreenProps {
   navigation: StackNavigationProp<any>;
 }
 
-const stamp = 6;
 const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
+  const {
+    userInfo: {rewards},
+  } = useUserState();
   return (
     <>
       <TopNavigation
@@ -37,7 +40,7 @@ const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
             onPress={() => navigation.navigate('reward')}>
             <Progress
               {...{
-                current: stamp,
+                current: rewards,
                 max: 12,
                 color: {
                   tint: '#FFC7A9',

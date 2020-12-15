@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Dimensions, SafeAreaView, ScrollView, StyleSheet} from 'react-native';
 import {
   Button,
@@ -10,55 +10,74 @@ import {
   TopNavigationAction,
   RadioGroup,
   Radio,
+  Card,
+  Modal,
 } from '@ui-kitten/components';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {localizeCredit} from '@lib/utils';
-import {PaymentMethodType} from '@interface/history';
-import {CouponType} from '@interface/types';
+import {HistoryClassType, PaymentMethodType} from '@interface/history';
+import {useAppState, useUserState} from '@store/index';
+import {useDispatch} from 'react-redux';
+import {
+  updateReward,
+  updateRewardHistory,
+  updateUserCredit,
+  updateUserHistory,
+} from '@store/slices/userSlice';
 
 interface PaymentScreenProps {
   navigation: StackNavigationProp<any, any>;
-  route: {
-    params: {
-      applyCoupon: CouponType[];
-    };
-  };
 }
 
-const PaymentScreen: React.FC<PaymentScreenProps> = ({
-  navigation,
-  route: {params},
-}) => {
+const PaymentScreen: React.FC<PaymentScreenProps> = ({navigation}) => {
+  const dispatch = useDispatch();
   const [paymentIndex, setPaymentIndex] = React.useState<PaymentMethodType>(0);
-  const data = [
-    {
-      name: '아이스 초코',
-      price: 1000,
-      uri: require('../../asset/product/1i.jpg'),
-    },
-    {
-      name: '아이스 티',
-      price: 1000,
-      uri: require('../../asset/product/0.jpg'),
-    },
-    {
-      name: '핫초코',
-      price: 1000,
-      uri: require('../../asset/product/1h.jpg'),
-    },
-    {
-      name: '핫초코',
-      price: 1000,
-      uri: require('../../asset/product/1h.jpg'),
-    },
-  ];
-  const applyCoupon = params?.applyCoupon;
+  const [isModalOpen, setModalOpen] = useState<boolean>(false);
+  const [modalText, setModalText] = useState<string>('');
+  const {userInfo} = useUserState();
+  const {basket, usedCoupon} = useAppState();
+  const couponTotal = usedCoupon.reduce((a, b) => a + b.price, 0);
+  const itemTotal = basket.reduce((a, b) => a + b.price, 0);
   const BackAction = () => (
     <TopNavigationAction
-      onPress={() => navigation.goBack()}
+      onPress={() => {
+        setModalText('정말로 주문을 취소하시겠습니까?');
+        setModalOpen(true);
+      }}
       icon={(props) => <Icon {...props} name="arrow-back" />}
     />
   );
+  const handlePay = (total: number) => {
+    const {credit, rewards} = userInfo;
+    if (total > credit) {
+      setModalOpen(true);
+      setModalText('주문을 하기에 돈이 충분하지 않습니다.');
+      return;
+    }
+
+    setModalOpen(true);
+    setModalText('결제 완료!');
+    dispatch(updateReward(rewards + 1));
+    dispatch(updateUserCredit(credit - total));
+    dispatch(
+      updateUserHistory({
+        class: HistoryClassType.use,
+        timestamp: Date.now(),
+        price: total,
+        product: basket,
+        paymentMethod: paymentIndex,
+      }),
+    );
+    dispatch(
+      updateRewardHistory({
+        title: '적립',
+        description: '일반 적립',
+        timestamp: Date.now(),
+        class: '적립',
+        count: 1,
+      }),
+    );
+  };
   return (
     <SafeAreaView>
       <TopNavigation
@@ -107,7 +126,6 @@ const PaymentScreen: React.FC<PaymentScreenProps> = ({
               onPress={() =>
                 navigation.navigate('coupon', {
                   isUsing: true,
-                  applyCoupon,
                 })
               }
               accessoryLeft={() => <Text>쿠폰 사용하기</Text>}
@@ -128,7 +146,7 @@ const PaymentScreen: React.FC<PaymentScreenProps> = ({
         <Layout style={styles.itemContainer}>
           <Text style={styles.title}>결제할 메뉴</Text>
           <Divider />
-          {data.map((item, index) => (
+          {basket.map((item, index) => (
             <>
               <Layout
                 style={{
@@ -152,27 +170,77 @@ const PaymentScreen: React.FC<PaymentScreenProps> = ({
         <Layout style={styles.priceContainer}>
           <Layout style={styles.priceWrapper}>
             <Text>총 주문금액</Text>
-            <Text style={styles.price}>{localizeCredit(1000)}</Text>
+            <Text style={styles.price}>{localizeCredit(itemTotal)}</Text>
           </Layout>
           <Layout style={styles.priceWrapper}>
             <Text>총 할인금액</Text>
-            <Text style={styles.discount}>- {localizeCredit(1000)}</Text>
+            <Text style={styles.discount}>- {localizeCredit(couponTotal)}</Text>
+          </Layout>
+          <Layout>
+            {usedCoupon.map((coupon) => (
+              <Layout style={styles.priceWrapper}>
+                <Text category="c1">{coupon.name}</Text>
+                <Text category="c1" style={styles.discount}>
+                  - {localizeCredit(coupon.price)}
+                </Text>
+              </Layout>
+            ))}
           </Layout>
           <Divider />
           <Layout style={styles.priceWrapper}>
             <Text>최종 결제금액</Text>
             <Text status="info" style={styles.priceTotal}>
-              {localizeCredit(0)}
+              {localizeCredit(
+                itemTotal - couponTotal > 0 ? itemTotal - couponTotal : 0,
+              )}
             </Text>
           </Layout>
         </Layout>
         <Button
+          onPress={() => handlePay(itemTotal - couponTotal)}
           style={{
             marginBottom: 15,
           }}>
           결제 & 주문하기
         </Button>
       </ScrollView>
+      <Modal
+        visible={isModalOpen}
+        backdropStyle={{
+          backgroundColor: 'rgba(0, 0, 0, 0.5)',
+        }}
+        onBackdropPress={() => setModalOpen(false)}>
+        <Card disabled={true}>
+          <Text
+            category="h6"
+            style={{
+              marginBottom: 15,
+            }}>
+            {modalText}
+          </Text>
+          <Layout
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+            }}>
+            <Button
+              style={{flex: 1, marginRight: 15}}
+              onPress={() => {
+                setModalOpen(false);
+                navigation.goBack();
+              }}>
+              네
+            </Button>
+            {modalText === '정말로 주문을 취소하시겠습니까?' ? (
+              <Button
+                style={{flex: 1, marginLeft: 15}}
+                onPress={() => setModalOpen(false)}>
+                아니오
+              </Button>
+            ) : null}
+          </Layout>
+        </Card>
+      </Modal>
     </SafeAreaView>
   );
 };
@@ -205,7 +273,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   discount: {
-    fontSize: 16,
     color: '#666',
   },
   priceTotal: {

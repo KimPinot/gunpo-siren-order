@@ -13,67 +13,40 @@ import {
 } from '@ui-kitten/components';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {Dimensions, StyleSheet} from 'react-native';
-import {CouponType} from '@interface/types';
+import {useAppState, useUserState} from '@store/index';
+import {setUsedCoupon} from '@store/slices/appSlice';
+import {useDispatch} from 'react-redux';
 
 interface CouponScreenProps {
   navigation: StackNavigationProp<any>;
   route: {
     params: {
       isUsing: boolean;
-      applyCoupon?: CouponType[];
     };
   };
 }
 
-const coupons = [
-  {
-    name: '웰컴 쿠폰',
-    couponNum: 1234555588,
-    expired: Date.now(),
-    price: 5000,
-  },
-  {
-    name: '웰컴 쿠폰',
-    couponNum: 1234555589,
-    expired: Date.now(),
-    price: 5000,
-  },
-  {
-    name: '웰컴 쿠폰',
-    couponNum: 1234555581,
-    expired: Date.now(),
-    price: 5000,
-  },
-  {
-    name: '웰컴 쿠폰',
-    couponNum: 1234555582,
-    expired: Date.now(),
-    price: 5000,
-  },
-  {
-    name: '웰컴 쿠폰',
-    couponNum: 1234555583,
-    expired: Date.now(),
-    price: 5000,
-  },
-];
-
 const CouponScreen: React.FC<CouponScreenProps> = ({
   navigation,
   route: {
-    params: {isUsing, applyCoupon},
+    params: {isUsing},
   },
 }) => {
-  const [selectedCoupon, setSelectedCoupon] = useState<CouponType[]>([]);
-  useEffect(() => {
-    applyCoupon?.length && setSelectedCoupon(applyCoupon);
-  }, [applyCoupon]);
+  const dispatch = useDispatch();
+
+  const {
+    userInfo: {coupons},
+  } = useUserState();
+
+  const {usedCoupon} = useAppState();
+
   const BackAction = () => (
     <TopNavigationAction
       onPress={() => navigation.goBack()}
       icon={(props) => <Icon {...props} name="arrow-back" />}
     />
   );
+
   return (
     <>
       <TopNavigation
@@ -99,20 +72,20 @@ const CouponScreen: React.FC<CouponScreenProps> = ({
                       marginRight: 5,
                     }}
                     checked={
-                      !!selectedCoupon.find(
-                        (e) => e.couponNum === item.couponNum,
-                      )
+                      !!usedCoupon.find((e) => e.couponNum === item.couponNum)
                     }
                     onChange={() =>
                       // @ts-ignore
-                      setSelectedCoupon(
-                        !selectedCoupon.find(
-                          (e) => e.couponNum === item.couponNum,
-                        )
-                          ? [...selectedCoupon, item]
-                          : selectedCoupon.filter(
-                              (e) => e.couponNum !== item.couponNum,
-                            ),
+                      dispatch(
+                        setUsedCoupon(
+                          !usedCoupon.find(
+                            (e) => e.couponNum === item.couponNum,
+                          )
+                            ? [...usedCoupon, item]
+                            : usedCoupon.filter(
+                                (e) => e.couponNum !== item.couponNum,
+                              ),
+                        ),
                       )
                     }
                   />
@@ -133,14 +106,14 @@ const CouponScreen: React.FC<CouponScreenProps> = ({
             />
           )}
         />
-        {selectedCoupon.length ? (
+        {usedCoupon.length ? (
           // @ts-ignore
           <Button
             style={styles.button}
             onPress={() =>
-              navigation.navigate('payment', {applyCoupon: selectedCoupon})
+              navigation.navigate('payment')
             }>
-            쿠폰 {selectedCoupon.length}개 적용하기
+            쿠폰 {usedCoupon.length}개 적용하기
           </Button>
         ) : null}
       </Layout>

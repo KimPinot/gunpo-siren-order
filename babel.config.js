@@ -22,6 +22,7 @@ module.exports = {
           '@interface': ['./src/interface'],
           '@lib': ['./src/lib'],
           '@component': ['./src/component'],
+          '@store': ['./src/store'],
         },
       },
     ],

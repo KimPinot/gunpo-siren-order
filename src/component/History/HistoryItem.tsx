@@ -13,8 +13,8 @@ interface HistoryItemProps {
 const HistoryItem: React.FC<HistoryItemProps> = ({index, item}) => {
   const title =
     item.product.length >= 2
-      ? `${item.product[0]} 외 ${item.product.length - 1}`
-      : item.product[0];
+      ? `${item.product[0].name} 외 ${item.product.length - 1}`
+      : item.product[0].name;
   const isAddHistory = item.class === HistoryClassType.add;
   const paymentMethod =
     item.paymentMethod === PaymentMethodType.inApp ? '현금' : '카드';
@@ -25,7 +25,10 @@ const HistoryItem: React.FC<HistoryItemProps> = ({index, item}) => {
       description={`${paymentMethod} | ${item.timestamp}`}
       accessoryRight={() => (
         <Layout style={styles.priceContainer}>
-          <Text category="s2" style={styles.price} status={isAddHistory ? 'primary' : ''}>
+          <Text
+            category="s2"
+            style={styles.price}
+            status={isAddHistory ? 'primary' : ''}>
             {localizeCredit(item.price)}
           </Text>
         </Layout>
