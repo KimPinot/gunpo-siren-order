@@ -68,7 +68,6 @@ const BasketScreen: React.FC<BasketScreenProps> = ({
           </Button>
         </Layout>
         <Layout style={styles.ButtonContainer}>
-          <Button style={styles.button} status="basic">장바구니에 추가</Button>
           <Button
             style={styles.button}
             status="basic"
