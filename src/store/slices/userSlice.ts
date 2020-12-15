@@ -74,6 +74,12 @@ const initialState: UserState = {
         expired: Date.now() + 300000,
         price: 1000,
       },
+      {
+        name: '별 12개 적용 쿠폰',
+        couponNum: 12121212121,
+        expired: Date.now() + 50000000,
+        price: 1000,
+      },
     ],
   },
 };
