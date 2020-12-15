@@ -56,7 +56,7 @@ const PaymentScreen: React.FC<PaymentScreenProps> = ({
   const BackAction = () => (
     <TopNavigationAction
       onPress={() => navigation.goBack()}
-      icon={(props) => <Icon {...props} name="arrow-back"/>}
+      icon={(props) => <Icon {...props} name="arrow-back" />}
     />
   );
   return (

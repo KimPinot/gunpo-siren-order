@@ -24,7 +24,9 @@ interface BasketScreenProps {
 
 const BasketScreen: React.FC<BasketScreenProps> = ({
   navigation,
-  route: {params: {item}},
+  route: {
+    params: {item},
+  },
 }) => {
   const [current, setCurrent] = useState<number>(1);
   const BackAction = () => (
@@ -48,6 +50,7 @@ const BasketScreen: React.FC<BasketScreenProps> = ({
             height: Dimensions.get('screen').width - 30,
             borderRadius: 10,
           }}
+          // @ts-ignore
           source={item.uri}
         />
         <Text style={styles.name}>{item.name}</Text>

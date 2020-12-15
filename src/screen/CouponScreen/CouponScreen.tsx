@@ -134,6 +134,7 @@ const CouponScreen: React.FC<CouponScreenProps> = ({
           )}
         />
         {selectedCoupon.length ? (
+          // @ts-ignore
           <Button
             style={styles.button}
             onPress={() =>

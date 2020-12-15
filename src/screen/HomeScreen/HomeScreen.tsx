@@ -67,7 +67,9 @@ const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
             onPress={() => navigation.navigate('coupon', {isUsing: false})}>
             <Layout>
               <Icon style={styles.icon} fill="#000" name="file-text-outline" />
-              <Text category="s1" style={styles.text}>쿠폰</Text>
+              <Text category="s1" style={styles.text}>
+                쿠폰
+              </Text>
             </Layout>
           </Card>
         </Layout>

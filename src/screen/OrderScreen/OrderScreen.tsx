@@ -8,7 +8,6 @@ import {
   TopNavigationAction,
   Icon,
   ListItem,
-  Layout,
 } from '@ui-kitten/components';
 import {ProductInfoType} from '@interface/types';
 import {StackNavigationProp} from '@react-navigation/stack';
@@ -64,6 +63,7 @@ const OrderScreen: React.FC<OrderScreenProps> = ({navigation}) => {
                     height: 60,
                     borderRadius: 500,
                   }}
+                  // @ts-ignore
                   source={item.uri}
                 />
               )}
