@@ -14,12 +14,21 @@ import {
 import {StackNavigationProp} from '@react-navigation/stack';
 import {localizeCredit} from '@lib/utils';
 import {PaymentMethodType} from '@interface/history';
+import {CouponType} from '@interface/types';
 
 interface PaymentScreenProps {
   navigation: StackNavigationProp<any, any>;
+  route: {
+    params: {
+      applyCoupon: CouponType[];
+    };
+  };
 }
 
-const PaymentScreen: React.FC<PaymentScreenProps> = ({navigation}) => {
+const PaymentScreen: React.FC<PaymentScreenProps> = ({
+  navigation,
+  route: {params},
+}) => {
   const [paymentIndex, setPaymentIndex] = React.useState<PaymentMethodType>(0);
   const data = [
     {
@@ -43,6 +52,7 @@ const PaymentScreen: React.FC<PaymentScreenProps> = ({navigation}) => {
       uri: require('../../asset/product/1h.jpg'),
     },
   ];
+  const applyCoupon = params?.applyCoupon;
   const BackAction = () => (
     <TopNavigationAction
       onPress={() => navigation.goBack()}
@@ -94,6 +104,12 @@ const PaymentScreen: React.FC<PaymentScreenProps> = ({navigation}) => {
                 padding: 0,
                 justifyContent: 'space-between',
               }}
+              onPress={() =>
+                navigation.navigate('coupon', {
+                  isUsing: true,
+                  applyCoupon,
+                })
+              }
               accessoryLeft={() => <Text>쿠폰 사용하기</Text>}
               accessoryRight={() => (
                 <Icon

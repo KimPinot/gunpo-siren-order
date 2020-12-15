@@ -8,6 +8,8 @@ import RewardScreen from '@screen/RewardScreen/RewardScreen';
 import OrderScreen from '@screen/OrderScreen/OrderScreen';
 import BasketScreen from '@screen/BasketScreen';
 import PaymentScreen from '@screen/PaymentScreen';
+import CouponScreen from '@screen/CouponScreen/CouponScreen';
+import CouponInfoScreen from '@screen/CouponScreen/CouponInfoScreen';
 
 export const Navigator = () => {
   const Stack = createStackNavigator();
@@ -41,6 +43,8 @@ export const Navigator = () => {
       <Stack.Screen name="order" component={OrderScreen} />
       <Stack.Screen name="basket" component={BasketScreen} />
       <Stack.Screen name="payment" component={PaymentScreen} />
+      <Stack.Screen name="coupon" component={CouponScreen} />
+      <Stack.Screen name="couponinfo" component={CouponInfoScreen} />
     </Stack.Navigator>
   );
 };
