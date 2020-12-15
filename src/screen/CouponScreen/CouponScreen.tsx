@@ -16,6 +16,7 @@ import {Dimensions, StyleSheet} from 'react-native';
 import {useAppState, useUserState} from '@store/index';
 import {setUsedCoupon} from '@store/slices/appSlice';
 import {useDispatch} from 'react-redux';
+import {localizeCredit} from '@lib/utils';
 
 interface CouponScreenProps {
   navigation: StackNavigationProp<any>;
@@ -63,7 +64,7 @@ const CouponScreen: React.FC<CouponScreenProps> = ({
           renderItem={({item}) => (
             <ListItem
               title={item.name}
-              description={item.couponNum}
+              description={localizeCredit(item.price) + ' | ' + item.couponNum}
               onPress={() => navigation.navigate('couponinfo', {coupon: item})}
               accessoryLeft={() =>
                 isUsing ? (
