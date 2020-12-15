@@ -9,6 +9,8 @@ import {
 } from '@ui-kitten/components';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {Dimensions, Image, StyleSheet} from 'react-native';
+import {format} from 'date-fns';
+import {localizeCredit} from '@lib/utils';
 
 interface CouponInfoScreenProps {
   navigation: StackNavigationProp<any>;
@@ -63,9 +65,17 @@ const CouponInfoScreen: React.FC<CouponInfoScreenProps> = ({
           style={{
             alignSelf: 'center',
             marginTop: 15,
+          }}
+          category="h6">
+          {localizeCredit(coupon.price)} 상당
+        </Text>
+        <Text
+          style={{
+            alignSelf: 'center',
+            marginTop: 15,
             fontSize: 15,
           }}>
-          {coupon.expired} 에 만료됩니다.
+          {format(coupon.expired, 'yyyy년 MM월 dd일 HH:mm:ss')} 에 만료됩니다.
         </Text>
         {/*<Text>{JSON.stringify(coupon)}</Text>*/}
       </Layout>

@@ -1,5 +1,10 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {HistoryType, RewardHistoryType} from '@interface/history';
+import {
+  HistoryClassType,
+  PaymentMethodType,
+  HistoryType,
+  RewardHistoryType,
+} from '@interface/history';
 import {UserType} from '@interface/types';
 
 interface UserState {
@@ -13,7 +18,39 @@ const initialState: UserState = {
     rewards: 2,
     userId: 202020512001,
     credit: 10000,
-    userHistory: [],
+    userHistory: [
+      {
+        class: HistoryClassType.use,
+        timestamp: Date.now() - 300000000,
+        price: -1000,
+        product: [
+          {
+            name: '아이스 티',
+            price: 1000,
+            uri: 'hello',
+          },
+        ],
+        paymentMethod: PaymentMethodType.local,
+      },
+      {
+        class: HistoryClassType.use,
+        timestamp: Date.now() - 600000000,
+        price: -2000,
+        product: [
+          {
+            name: '아이스 티',
+            price: 1000,
+            uri: 'hello',
+          },
+          {
+            name: '아이스 티',
+            price: 1000,
+            uri: 'hello',
+          },
+        ],
+        paymentMethod: PaymentMethodType.inApp,
+      },
+    ],
     rewardHistory: [
       {
         title: '적립',

@@ -15,6 +15,7 @@ import {
 import {StackNavigationProp} from '@react-navigation/stack';
 import {Progress} from '@component/Progress';
 import {useUserState} from '@store/index';
+import {format} from 'date-fns';
 
 interface RewardScreenProps {
   navigation: StackNavigationProp<any>;
@@ -78,7 +79,9 @@ const RewardScreen: React.FC<RewardScreenProps> = ({navigation}) => {
                   disabled={true}
                   description={() => (
                     <Layout style={styles.listDisc}>
-                      <Text style={styles.date}>일자 : {item.timestamp}</Text>
+                      <Text style={styles.date}>
+                        일자 : {format(item.timestamp, 'yyyy-MM-dd HH:mm')}
+                      </Text>
                       <Text style={styles.desc}>{item.description}</Text>
                     </Layout>
                   )}

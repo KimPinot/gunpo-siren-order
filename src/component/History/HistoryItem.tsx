@@ -4,6 +4,7 @@ import {HistoryType} from '@interface/history';
 import {PaymentMethodType, HistoryClassType} from '@interface/history';
 import {localizeCredit} from '@lib/utils';
 import {StyleSheet} from 'react-native';
+import {format} from 'date-fns';
 
 interface HistoryItemProps {
   index: number;
@@ -22,7 +23,10 @@ const HistoryItem: React.FC<HistoryItemProps> = ({index, item}) => {
     <ListItem
       disabled={true}
       title={title}
-      description={`${paymentMethod} | ${item.timestamp}`}
+      description={`${paymentMethod} | ${format(
+        item.timestamp,
+        'yyyy-MM-dd HH:mm',
+      )}`}
       accessoryRight={() => (
         <Layout style={styles.priceContainer}>
           <Text
